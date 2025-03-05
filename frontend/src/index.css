@@ -5,6 +5,6 @@
     }
 }
 
-.animate-blink {
+.letter .cursor-line {
     animation: blink 1s infinite;
 }

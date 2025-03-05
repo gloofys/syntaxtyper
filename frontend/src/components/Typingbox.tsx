@@ -24,24 +24,48 @@ const TypingBox: React.FC = () => {
 
     const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (!snippet) return;
-        const value = e.key;
 
-        if (value.length === 1) {
-            if (value === snippet[currentIndex]) {
-                setInput((prev) => prev + value);
+        const expectedChar = snippet[currentIndex];
+
+
+        if (e.key === "Enter") {
+            e.preventDefault();
+
+            if (expectedChar === "\n") {
+                setInput((prev) => prev + "\n");
+                setCurrentIndex((prev) => prev + 1);
+            } else {
+                setErrors((prev) => [...prev, currentIndex]);
+                setInput((prev) => prev + "\n");
+                setCurrentIndex((prev) => prev + 1);
+            }
+            return;
+        }
+
+        if (e.key.length === 1) {
+            if (e.key === expectedChar) {
+                setInput((prev) => prev + e.key);
             } else {
                 setErrors((prev) => [...prev, currentIndex]);
             }
             setCurrentIndex((prev) => prev + 1);
+            return;
         }
 
-        // Handle backspace
         if (e.key === "Backspace" && currentIndex > 0) {
-            setInput((prev) => prev.slice(0, -1));
-            setCurrentIndex((prev) => prev - 1);
-            setErrors((prev) => prev.filter((idx) => idx !== currentIndex - 1));
+            e.preventDefault();
+            const prevChar = snippet[currentIndex - 1];
+
+            if (prevChar === "\n") {
+                setCurrentIndex((prev) => prev - 1);
+            } else {
+                setInput((prev) => prev.slice(0, -1));
+                setCurrentIndex((prev) => prev - 1);
+                setErrors((prev) => prev.filter((idx) => idx !== currentIndex - 1));
+            }
         }
     };
+
 
     useEffect(() => {
         inputRef.current?.focus();
@@ -51,26 +75,32 @@ const TypingBox: React.FC = () => {
         <div className="flex flex-col items-center justify-center min-h-screen p-5">
             <h2 className="text-xl font-bold mb-4">Type the snippet below:</h2>
 
-            <div
-                className="bg-gray-100 p-4 rounded-md text-lg font-mono mb-4 w-full max-w-2xl leading-relaxed"
+            <pre
+                className="bg-gray-100 p-4 rounded-md text-lg font-mono mb-4 w-full max-w-2xl leading-relaxed whitespace-pre-line"
                 onClick={() => inputRef.current?.focus()}
             >
-                {snippet.split("").map((char, index) => {
-                    let textColor = "text-gray-700";
-                    if (index < currentIndex) {
-                        textColor = errors.includes(index) ? "text-red-500" : "text-green-500";
-                    }
+  {snippet.split("").map((char, index) => {
+      let textColor = "text-gray-700";
+      if (index < currentIndex) {
+          textColor = errors.includes(index) ? "text-red-500 bg-red-200" : "text-green-500 bg-green-100";
+      } else if (index === currentIndex) {
+          textColor = "text-blue-500";
+      }
 
-                    return (
-                        <span key={index} className={`${textColor} relative`}>
-              {char}
-                            {index === currentIndex && (
-                                <span className="absolute left-0 w-[2px] h-6 bg-blue-500 animate-blink"></span>
-                            )}
-            </span>
-                    );
-                })}
-            </div>
+      return (
+          <span
+              key={index}
+              className={`letter relative ${textColor}`}
+          >
+        {char === " " ? "\u00A0" : char}
+              {index === currentIndex && (
+                  <span
+                      className="cursor-line absolute bottom-0 left-0 w-full h-[2px] bg-blue-500 animate-blink"></span>
+              )}
+      </span>
+      );
+  })}
+</pre>
 
             {/* Invisible input for capturing keystrokes */}
             <input
@@ -92,6 +122,6 @@ const TypingBox: React.FC = () => {
             )}
         </div>
     );
-};
+}
 
 export default TypingBox;
