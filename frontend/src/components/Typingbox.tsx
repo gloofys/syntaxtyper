@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { fetchSnippet } from "../api/snippets";
+import React, {useState, useEffect, useRef} from "react";
+import {fetchSnippet} from "../api/snippets";
 
 const TypingBox: React.FC = () => {
     const [snippet, setSnippet] = useState("");
@@ -32,11 +32,9 @@ const TypingBox: React.FC = () => {
             e.preventDefault();
 
             if (expectedChar === "\n") {
-                setInput((prev) => prev + "\n");
                 setCurrentIndex((prev) => prev + 1);
             } else {
                 setErrors((prev) => [...prev, currentIndex]);
-                setInput((prev) => prev + "\n");
                 setCurrentIndex((prev) => prev + 1);
             }
             return;
@@ -76,7 +74,7 @@ const TypingBox: React.FC = () => {
             <h2 className="text-xl font-bold mb-4">Type the snippet below:</h2>
 
             <pre
-                className="bg-gray-100 p-4 rounded-md text-lg font-mono mb-4 w-full max-w-2xl leading-relaxed whitespace-pre-line"
+                className="bg-gray-100 p-4 rounded-md text-lg font-mono mb-4 w-full max-w-2xl leading-relaxed whitespace-pre-wrap"
                 onClick={() => inputRef.current?.focus()}
             >
   {snippet.split("").map((char, index) => {
@@ -88,12 +86,21 @@ const TypingBox: React.FC = () => {
       }
 
       return (
-          <span
-              key={index}
-              className={`letter relative ${textColor}`}
-          >
-        {char === " " ? "\u00A0" : char}
-              {index === currentIndex && (
+          <span key={index} className={`letter relative ${textColor}`}>
+        {char === " " ? "\u00A0" : char === "\n" ? (
+            <span className={`relative ${textColor}`}>
+            ⏎
+                {index === currentIndex && (
+                    <span
+                        className="cursor-line absolute bottom-0 left-0 w-full h-[2px] bg-blue-500 animate-blink"></span>
+                )}
+                <br/>
+          </span>
+        ) : (
+            char
+        )}
+
+              {index === currentIndex && char !== "\n" && (
                   <span
                       className="cursor-line absolute bottom-0 left-0 w-full h-[2px] bg-blue-500 animate-blink"></span>
               )}
@@ -101,6 +108,7 @@ const TypingBox: React.FC = () => {
       );
   })}
 </pre>
+
 
             {/* Invisible input for capturing keystrokes */}
             <input
