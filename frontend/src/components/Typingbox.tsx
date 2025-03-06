@@ -40,6 +40,22 @@ const TypingBox: React.FC = () => {
             return;
         }
 
+        // Handle Tab key (insert 4 spaces)
+        if (e.key === "Tab") {
+            e.preventDefault(); // Prevent browser default behavior
+
+            const spaceCount = 4;
+            const expectedSpaces = snippet.slice(currentIndex, currentIndex + spaceCount);
+
+            if (expectedSpaces === "    ") {
+                setCurrentIndex((prev) => prev + spaceCount);
+            } else {
+                setErrors((prev) => [...prev, ...Array.from(Array(spaceCount).keys()).map(i => currentIndex + i)]);
+                setCurrentIndex((prev) => prev + spaceCount);
+            }
+            return;
+        }
+
         if (e.key.length === 1) {
             if (e.key === expectedChar) {
                 setInput((prev) => prev + e.key);
