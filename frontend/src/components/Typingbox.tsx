@@ -1,11 +1,15 @@
 import React, {useState, useEffect, useRef} from "react";
 import {fetchSnippet} from "../api/snippets";
+import Results from "./Results.tsx";
 
 const TypingBox: React.FC = () => {
     const [snippet, setSnippet] = useState("");
     const [input, setInput] = useState("");
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [isRunning, setIsRunning] = useState(false);
+    const [time, setTime] = useState(0);
     const [errors, setErrors] = useState<number[]>([]);
+    const [isCompleted, setIsCompleted] = useState(false);
     const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
@@ -19,11 +23,16 @@ const TypingBox: React.FC = () => {
             setInput("");
             setCurrentIndex(0);
             setErrors([]);
+            setIsCompleted(false)
+            setIsRunning(false);
+            setTime(0);
         }
     };
 
     const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (!snippet) return;
+        if (!snippet || isCompleted) return;
+
+        if (!isRunning) setIsRunning(true);
 
         const expectedChar = snippet[currentIndex];
 
@@ -77,6 +86,11 @@ const TypingBox: React.FC = () => {
                 setCurrentIndex((prev) => prev - 1);
                 setErrors((prev) => prev.filter((idx) => idx !== currentIndex - 1));
             }
+
+            if (currentIndex + 1 === snippet.length) {
+                setIsRunning(false);
+                setIsCompleted(true);
+            }
         }
     };
 
@@ -88,6 +102,9 @@ const TypingBox: React.FC = () => {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen p-5">
             <h2 className="text-xl font-bold mb-4">Type the snippet below:</h2>
+
+            {!isCompleted?(
+                <>
 
             <pre
                 className="bg-gray-100 p-4 rounded-md text-lg font-mono mb-4 w-full max-w-2xl leading-relaxed whitespace-pre-wrap"
@@ -135,14 +152,17 @@ const TypingBox: React.FC = () => {
                 onKeyDown={handleKeyPress}
                 readOnly
             />
-
-            {currentIndex === snippet.length && (
-                <button
-                    className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md"
-                    onClick={loadNewSnippet}
-                >
-                    Try Another
-                </button>
+            </>
+                ):(
+                    <Results
+                        time={time}
+                        charCount={currentIndex}
+                        errors={errors.length}
+                        snippet ={snippet}
+                        onReset={loadNewSnippet}
+                        isRunning={isRunning}
+                        isCompleted={isCompleted}
+                        />
             )}
         </div>
     );
