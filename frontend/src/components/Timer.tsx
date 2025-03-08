@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 
 interface TimerProps {
     isRunning: boolean;
@@ -6,12 +6,12 @@ interface TimerProps {
     isCompleted: boolean;
 }
 
-const Timer: React.FC<TimerProps> = ({ isRunning, onTimeUpdate, isCompleted }) => {
+const Timer: React.FC<TimerProps> = ({isRunning, onTimeUpdate, isCompleted}) => {
     const [time, setTime] = useState(0);
+    const [finalTime, setFinalTime] = useState<number | null>(null);
 
     useEffect(() => {
         let interval: number | undefined;
-
         if (isRunning) {
             interval = window.setInterval(() => {
                 setTime((prevTime) => {
@@ -20,23 +20,20 @@ const Timer: React.FC<TimerProps> = ({ isRunning, onTimeUpdate, isCompleted }) =
                     return newTime;
                 });
             }, 1000);
-        } else {
-            clearInterval(interval);
         }
-
         return () => {
             if (interval !== undefined) clearInterval(interval);
         };
     }, [isRunning]);
 
-    // ✅ Reset time when test is completed or restarted
     useEffect(() => {
-        if (!isRunning || isCompleted) {
-            setTime(0);
+        if(isCompleted && time > 0) {
+            setFinalTime(time);
         }
-    }, [isRunning, isCompleted]);
+    }, [isCompleted]);
 
-    return <div className="text-xl font-bold">Time: {time}s</div>;
+
+    return <div className="text-xl font-bold">Time: {finalTime !== null ? finalTime : time}s</div>;
 };
 
 export default Timer;

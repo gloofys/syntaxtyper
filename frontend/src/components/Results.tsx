@@ -1,5 +1,4 @@
 import React from "react";
-import Timer from "./Timer.tsx";
 import WPM from "./WPM.tsx";
 import Accuracy from "./Accuracy.tsx";
 
@@ -10,11 +9,9 @@ interface ResultsProps {
     snippet:string;
     onReset: () => void;
     isCompleted: boolean;
-    isRunning: boolean;
-
 }
 
-const Results:React.FC<ResultsProps> = ({time, charCount, errors, snippet, isCompleted, onReset}) => {
+const Results:React.FC<ResultsProps> = ({time, charCount, errors, snippet, onReset}) => {
 //     EXECUTION RESULTS TO BE ADDED HERE
     const executeSnippet = (code: string) => {
         if(code.includes("return")) return "Output: 42";
@@ -27,7 +24,7 @@ const Results:React.FC<ResultsProps> = ({time, charCount, errors, snippet, isCom
             <p className = "text-xl mb-4">Results:</p>
 
             <div className = "flex justify-center space-x-6 mt-4">
-                <Timer isRunning={false} isCompleted={isCompleted} onTimeUpdate={() => {}} />
+                <div className="text-xl font-bold">Time: {time}s</div>
                 <WPM time={time} charCount={charCount}/>
                 <Accuracy correctChars={charCount - errors} totalChars={charCount}/>
             </div>

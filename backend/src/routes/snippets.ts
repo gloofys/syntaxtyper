@@ -7,7 +7,7 @@ const snippets = [
     {
         id : 1,
         language: "javascript",
-        text: `function add(a, b) {\n  return a + b;\n}`
+        text: `function add(a, b) {\n    return a + b;\n}`
     },
     {
         id: 2,
