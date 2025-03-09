@@ -2,7 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import { fetchSnippet } from "../api/snippets";
 import Results from "./Results.tsx";
 
-const TypingBox: React.FC = () => {
+interface TypingProps {
+    selectedLanguage: string;
+}
+const TypingBox: React.FC<TypingProps> = ({selectedLanguage}) => {
     const [snippet, setSnippet] = useState("");
     const [input, setInput] = useState("");
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -13,8 +16,8 @@ const TypingBox: React.FC = () => {
     const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
-        loadNewSnippet();
-    }, []);
+        if (selectedLanguage) loadNewSnippet();
+    }, [selectedLanguage]);
 
     // Timer effect: update time every second when running
     useEffect(() => {
@@ -38,7 +41,7 @@ const TypingBox: React.FC = () => {
     }, [currentIndex, snippet]);
 
     const loadNewSnippet = async () => {
-        const data = await fetchSnippet();
+        const data = await fetchSnippet(selectedLanguage);
         if (data) {
             setSnippet(data.text);
             setInput("");
