@@ -22,6 +22,11 @@ const snippets = [
         id: 4,
         language: "react",
         text: `const [state, setState] = useState(initialState);`
+    },
+    {
+        id: 5,
+        language: "react",
+        text: `const [fred, setFred] = useState('')`
     }
 ];
 
