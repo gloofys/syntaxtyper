@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom
 import Home from "./pages/Home.tsx";
 import Lessons from "./pages/Lessons.tsx";
 import Challenges from "./pages/Challenges.tsx";
+import LessonDetail from "./pages/LessonDetail.tsx";
 
 const App = () => {
     const [selectedLanguage, setSelectedLanguage] = useState("react");
@@ -17,6 +18,7 @@ const App = () => {
                 {/* Language-specific routes */}
                 <Route path="/:language" element={<Home />} />
                 <Route path="/:language/lessons" element={<Lessons />} />
+                <Route path="/:language/lesson/:lessonId" element={<LessonDetail />} />
                 <Route path="/:language/challenges" element={<Challenges />} />
             </Routes>
         </div>
