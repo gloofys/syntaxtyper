@@ -7,7 +7,7 @@ const Home = () => {
     const [selectedLanguage] = useState("react");
     return (
         <div className="p-4">
-            <h2 className = "text-2xl font-bold">Welcome to {language} Typing Tests</h2>
+            <h2 className = "text-2xl font-bold">Welcome to {language} Typing Challenges</h2>
             <TypingBox selectedLanguage={selectedLanguage}/>
         </div>
 
