@@ -107,10 +107,6 @@ const TypingBox: React.FC<TypingProps> = ({selectedLanguage}) => {
                 setCurrentIndex((prev) => Math.max(prev - 1, 0));
                 setErrors((prev) => prev.filter((idx) => idx !== currentIndex - 1));
             }
-            if (currentIndex + 1 === snippet.length) {
-                setIsRunning(false);
-                setIsCompleted(true);
-            }
         }
     };
 
@@ -120,7 +116,7 @@ const TypingBox: React.FC<TypingProps> = ({selectedLanguage}) => {
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen p-5">
-            <h2 className="text-xl font-bold mb-4">Type the snippet below:</h2>
+            {/*<h2 className="text-xl font-bold mb-4">Type the snippet below:</h2>*/}
 
             {!isCompleted ? (
                 <>
