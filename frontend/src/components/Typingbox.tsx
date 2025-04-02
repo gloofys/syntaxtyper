@@ -16,7 +16,15 @@ const TypingBox: React.FC<TypingProps> = ({selectedLanguage}) => {
     const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
-        if (selectedLanguage) loadNewSnippet();
+        if (!selectedLanguage) return;
+
+        void (async () => {
+            try {
+                await loadNewSnippet();
+            } catch (err) {
+                console.error("Failed to load snippet:", err);
+            }
+        })();
     }, [selectedLanguage]);
 
     // Timer effect: update time every second when running
