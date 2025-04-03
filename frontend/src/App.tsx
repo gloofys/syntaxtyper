@@ -5,6 +5,7 @@ import Home from "./pages/Home.tsx";
 import Challenges from "./pages/Challenges.tsx";
 import LessonDetail from "./pages/LessonDetail.tsx";
 import LessonsList from "./pages/LessonsList.tsx";
+import CongratulationsPage from "./pages/CongratulationsPage.tsx";
 
 const App = () => {
     const [selectedLanguage, setSelectedLanguage] = useState("react");
@@ -15,6 +16,7 @@ const App = () => {
             <Routes>
                 {/* Redirect root to default language */}
                 <Route path="/" element={<Navigate to="/react" />} />
+                <Route path="/congratulations" element={<CongratulationsPage />} />
                 {/* Language-specific routes */}
                 <Route path="/:language" element={<Home />} />
                 <Route path="/:language/lessons" element={<LessonsList />} />

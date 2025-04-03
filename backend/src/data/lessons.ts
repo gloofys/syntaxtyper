@@ -44,7 +44,7 @@ export const lessons: Lesson[] = [
     {
         lessonId: 4,
         language:"java",
-        title: "Introduction to Java",
+        title: "Introduction to Java 2",
         steps: [
             { title: "Basics", description: "Welcome to Java Lesson 2."},
             { title: "Setup", description: "Setup of "},
