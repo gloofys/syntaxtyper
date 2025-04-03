@@ -33,12 +33,21 @@ export const lessons: Lesson[] = [
         ],
     },
     {
-        lessonId: 1,
+        lessonId: 3,
         language: "java",
         title: "Introduction to Java",
         steps: [
             { title: "Introduction", description: "Welcome to Java Lesson 1." },
             { title: "Setup", description: "Learn how to set up Java." },
+        ],
+    },
+    {
+        lessonId: 4,
+        language:"java",
+        title: "Introduction to Java",
+        steps: [
+            { title: "Basics", description: "Welcome to Java Lesson 2."},
+            { title: "Setup", description: "Setup of "},
         ],
     },
 ];
