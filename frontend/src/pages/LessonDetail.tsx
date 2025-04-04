@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import TypingBox from "../components/Typingbox.tsx";
 import {fetchLesson} from "../api/lessons.ts";
+import { useLessonStore } from "../context/LessonContext";
 
 interface StepData {
     title: string;
@@ -23,6 +24,7 @@ const LessonDetail: React.FC = () => {
     const [currentStep, setCurrentStep] = useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    const { fetchLessons, totalLessons } = useLessonStore();
 
     useEffect(() => {
         async function fetchLessonData() {
@@ -42,14 +44,24 @@ const LessonDetail: React.FC = () => {
         }
 
         fetchLessonData();
-    }, [selectedLanguage, lessonId]);
+    }, [selectedLanguage, lessonId])
+
+    useEffect(() => {
+        fetchLessons(selectedLanguage);
+    }, [selectedLanguage]);
 
     const handleNext = () => {
         if (!lessonData) return;
         if (currentStep < lessonData.steps.length) {
             setCurrentStep((prev) => prev + 1);
         } else {
-            navigate("/congratulations", { state: { lessonNumber } });
+            navigate("/congratulations", {
+                state: {
+                    lessonNumber,
+                    language: selectedLanguage,
+                    totalLessons,
+                },
+            });
         }
     };
 

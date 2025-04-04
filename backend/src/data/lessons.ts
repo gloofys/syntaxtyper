@@ -33,7 +33,7 @@ export const lessons: Lesson[] = [
         ],
     },
     {
-        lessonId: 3,
+        lessonId: 1,
         language: "java",
         title: "Introduction to Java",
         steps: [
@@ -42,7 +42,7 @@ export const lessons: Lesson[] = [
         ],
     },
     {
-        lessonId: 4,
+        lessonId: 2,
         language:"java",
         title: "Introduction to Java 2",
         steps: [
