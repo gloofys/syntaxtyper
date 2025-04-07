@@ -1,21 +1,30 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import {useParams, useNavigate} from "react-router-dom";
 import TypingBox from "../components/Typingbox.tsx";
 import {fetchLesson} from "../api/lessons.ts";
-import { useLessonStore } from "../context/LessonContext";
+import {useLessonStore} from "../context/LessonContext"
+import Quiz from "../components/Quiz.tsx";
 
 interface StepData {
     title: string;
     description: string;
     type?: string;
+    questions?: QuizQuestion[]
 }
+
+interface QuizQuestion {
+    question: string;
+    options: string[];
+    correctIndex: number;
+}
+
 
 interface LessonData {
     steps: StepData[];
 }
 
 const LessonDetail: React.FC = () => {
-    const { language, lessonId } = useParams<{ language: string; lessonId: string }>();
+    const {language, lessonId} = useParams<{ language: string; lessonId: string }>();
     const navigate = useNavigate();
     const selectedLanguage = language || "react";
     const lessonNumber = Number(lessonId);
@@ -24,7 +33,7 @@ const LessonDetail: React.FC = () => {
     const [currentStep, setCurrentStep] = useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
-    const { fetchLessons, totalLessons } = useLessonStore();
+    const {fetchLessons, totalLessons} = useLessonStore();
 
     useEffect(() => {
         async function fetchLessonData() {
@@ -84,7 +93,17 @@ const LessonDetail: React.FC = () => {
                 <div>
                     <h3 className="text-xl font-bold">{step.title}</h3>
                     <p className="mt-2">{step.description}</p>
-                    <TypingBox selectedLanguage={selectedLanguage} />
+                    <TypingBox selectedLanguage={selectedLanguage}/>
+                </div>
+            );
+        }
+
+        if (step.type === "quiz" && step.questions) {
+            return (
+                <div>
+                    <h3 className="text-xl font-bold">{step.title}</h3>
+                    <p className="mt-2">{step.description}</p>
+                    <Quiz questions={step.questions} onComplete={handleNext} />
                 </div>
             );
         }
@@ -110,30 +129,32 @@ const LessonDetail: React.FC = () => {
     }
 
     return (
-        <div className="p-4">
-            <h2 className="text-2xl font-bold">
-                {selectedLanguage.toUpperCase()} Lesson {lessonNumber}
-            </h2>
-            <p className="mt-2">
-                Step {currentStep} of {lessonData.steps.length}
-            </p>
+        <div className="p-4 flex justify-center">
+            <div className="max-w-6xl w-full">
+                <h2 className="text-2xl font-bold">
+                    {selectedLanguage.toUpperCase()} Lesson {lessonNumber}
+                </h2>
+                <p className="mt-2">
+                    Step {currentStep} of {lessonData.steps.length}
+                </p>
 
-            <div className="mt-4 p-4 border rounded-md">{renderStepContent()}</div>
+                <div className="mt-4 p-4 border rounded-md">{renderStepContent()}</div>
 
-            <div className="mt-4 flex space-x-4">
-                <button
-                    onClick={handlePrev}
-                    disabled={currentStep === 1}
-                    className="px-4 py-2 bg-gray-300 rounded-md disabled:opacity-50"
-                >
-                    Previous
-                </button>
-                <button
-                    onClick={handleNext}
-                    className="px-4 py-2 bg-blue-500 text-white rounded-md"
-                >
-                    {currentStep === lessonData.steps.length ? "Finish" : "Next"}
-                </button>
+                <div className="mt-4 flex space-x-4">
+                    <button
+                        onClick={handlePrev}
+                        disabled={currentStep === 1}
+                        className="px-4 py-2 bg-gray-300 rounded-md disabled:opacity-50"
+                    >
+                        Previous
+                    </button>
+                    <button
+                        onClick={handleNext}
+                        className="px-4 py-2 bg-blue-500 text-white rounded-md"
+                    >
+                        {currentStep === lessonData.steps.length ? "Finish" : "Next"}
+                    </button>
+                </div>
             </div>
         </div>
     );

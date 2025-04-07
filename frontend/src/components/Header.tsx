@@ -14,17 +14,13 @@ const Header: React.FC<HeaderProps> = ({selectedLanguage, onLanguageChange}) => 
         const newLanguage = e.target.value;
         onLanguageChange(newLanguage);
 
-        // Get the current pathname, e.g. "/java/lessons"
         const { pathname } = location;
-        // Split into segments: ['', 'java', 'lessons']
         const parts = pathname.split("/");
-        // Replace the language segment (index 1) with the new language
         if (parts.length > 1) {
             parts[1] = newLanguage;
             const newPath = parts.join("/") || `/${newLanguage}`;
             navigate(newPath);
         } else {
-            // Fallback if pathname is unexpectedly short
             navigate(`/${newLanguage}`);
         }
     };

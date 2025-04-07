@@ -14,10 +14,8 @@ const App = () => {
         <div className = "bg-white dark:bg-gray-400">
             <Header selectedLanguage={selectedLanguage} onLanguageChange={setSelectedLanguage} />
             <Routes>
-                {/* Redirect root to default language */}
                 <Route path="/" element={<Navigate to="/react" />} />
                 <Route path="/congratulations" element={<CongratulationsPage />} />
-                {/* Language-specific routes */}
                 <Route path="/:language" element={<Home />} />
                 <Route path="/:language/lessons" element={<LessonsList />} />
                 <Route path="/:language/lesson/:lessonId" element={<LessonDetail />} />

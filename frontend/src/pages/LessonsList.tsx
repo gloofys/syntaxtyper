@@ -34,22 +34,28 @@ const LessonsList: React.FC = () => {
     if (error) return <div>Error: {error}</div>;
 
     return (
-        <div className="p-4">
-            <h2 className="text-2xl font-bold">
-                {selectedLanguage.toUpperCase()} Lessons
-            </h2>
-            <ul className="mt-4 space-y-2">
-                {lessons.map((lesson) => (
-                    <li key={lesson.lessonId}>
-                        <Link
-                            to={`/${selectedLanguage}/lesson/${lesson.lessonId}`}
-                            className="text-blue-500 hover:underline"
-                        >
-                            Lesson {lesson.lessonId}: {lesson.title}
-                        </Link>
-                    </li>
-                ))}
-            </ul>
+        <div className="p-4 flex justify-center">
+            <div className="w-full max-w-2xl">
+                <h2 className="text-2xl font-bold mb-6 text-center">
+                    {selectedLanguage.toUpperCase()} Lessons
+                </h2>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 place-items-center">
+                    {lessons.map((lesson) => (
+                        <div key={lesson.lessonId} className="flex flex-col items-center">
+                            <Link
+                                to={`/${selectedLanguage}/lesson/${lesson.lessonId}`}
+                                className="aspect-square w-24 bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold rounded-xl flex items-center justify-center text-xl shadow transition"
+                            >
+                                {lesson.lessonId}
+                            </Link>
+                            <p className="mt-2 text-sm text-center max-w-[8rem] break-words">
+                                {lesson.title}
+                            </p>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
     );
 };
