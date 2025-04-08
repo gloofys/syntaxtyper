@@ -9,7 +9,8 @@ interface StepData {
     title: string;
     description: string;
     type?: string;
-    questions?: QuizQuestion[]
+    questions?: QuizQuestion[];
+    codeSnippet?: string;
 }
 
 interface QuizQuestion {
@@ -93,7 +94,10 @@ const LessonDetail: React.FC = () => {
                 <div>
                     <h3 className="text-xl font-bold">{step.title}</h3>
                     <p className="mt-2">{step.description}</p>
-                    <TypingBox selectedLanguage={selectedLanguage}/>
+                    <TypingBox
+                        selectedLanguage={selectedLanguage}
+                        providedSnippet={step.codeSnippet}
+                    />
                 </div>
             );
         }

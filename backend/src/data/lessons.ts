@@ -9,6 +9,7 @@ export interface Step {
     description: string;
     type?: string;
     questions?: QuizQuestion[];
+    codeSnippet?: string;
 }
 
 export interface Lesson {
@@ -26,7 +27,9 @@ export const lessons: Lesson[] = [
         title: "Introduction",
         steps: [
             {title: "Introduction", description: "Welcome to React Lesson 1."},
-            {title: "Typing Challenge", description: "Practice your React syntax.", type: "typingChallenge"},
+            {title: "Typing Challenge", description: "Practice your React syntax.", type: "typingChallenge" ,codeSnippet: `function Hello() {
+  return <h1>Hello World</h1>;
+}`,},
             {title: "Explanation", description: "Review key concepts."},
             {
                 title: "Quiz", description: "Answer questions to test your understanding.", type: "quiz", questions: [{

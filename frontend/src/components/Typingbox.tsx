@@ -4,8 +4,9 @@ import Results from "./Results.tsx";
 
 interface TypingProps {
     selectedLanguage: string;
+    providedSnippet?: string;
 }
-const TypingBox: React.FC<TypingProps> = ({selectedLanguage}) => {
+const TypingBox: React.FC<TypingProps> = ({selectedLanguage, providedSnippet}) => {
     const [snippet, setSnippet] = useState("");
     const [input, setInput] = useState("");
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -16,16 +17,19 @@ const TypingBox: React.FC<TypingProps> = ({selectedLanguage}) => {
     const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
-        if (!selectedLanguage) return;
+        if (providedSnippet) {
+            setSnippet(providedSnippet);
+            setInput("");
+            setCurrentIndex(0);
+            setErrors([]);
+            setIsCompleted(false);
+            setIsRunning(false);
+            setTime(0);
+        } else if (selectedLanguage) {
+            loadNewSnippet();
+        }
+    }, [selectedLanguage, providedSnippet]);
 
-        void (async () => {
-            try {
-                await loadNewSnippet();
-            } catch (err) {
-                console.error("Failed to load snippet:", err);
-            }
-        })();
-    }, [selectedLanguage]);
 
     // Timer effect: update time every second when running
     useEffect(() => {
