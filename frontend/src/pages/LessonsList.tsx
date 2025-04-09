@@ -40,7 +40,8 @@ const LessonsList: React.FC = () => {
                     {selectedLanguage.toUpperCase()} Lessons
                 </h2>
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 place-items-center">
+                <div className="grid gap-6 place-items-center grid-cols-[repeat(auto-fit,minmax(12rem,1fr))]">
+
                     {lessons.map((lesson) => (
                         <div key={lesson.lessonId} className="flex flex-col items-center">
                             <Link
