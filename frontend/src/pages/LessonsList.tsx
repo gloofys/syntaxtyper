@@ -19,7 +19,6 @@ const LessonsList: React.FC = () => {
             try {
                 setLoading(true);
                 const response = await axios.get(`/api/lessons?language=${selectedLanguage}`);
-                // Assuming the API returns { lessons: Lesson[] }
                 setLessons(response.data.lessons || []);
             } catch (err: any) {
                 setError("Failed to fetch lessons");
