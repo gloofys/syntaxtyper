@@ -10,6 +10,7 @@ export interface Step {
     type?: string;
     questions?: QuizQuestion[];
     codeSnippet?: string;
+    blankLines?: number[];
 }
 
 export interface Lesson {

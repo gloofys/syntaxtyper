@@ -31,7 +31,6 @@ const TypingBox: React.FC<TypingProps> = ({selectedLanguage, providedSnippet}) =
     }, [selectedLanguage, providedSnippet]);
 
 
-    // Timer effect: update time every second when running
     useEffect(() => {
         let interval: number | undefined;
         if (isRunning) {
@@ -166,7 +165,6 @@ const TypingBox: React.FC<TypingProps> = ({selectedLanguage, providedSnippet}) =
             })}
           </pre>
 
-                    {/* Invisible input for capturing keystrokes */}
                     <input
                         ref={inputRef}
                         type="text"

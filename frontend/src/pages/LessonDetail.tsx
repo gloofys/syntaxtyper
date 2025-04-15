@@ -4,6 +4,7 @@ import TypingBox from "../components/Typingbox.tsx";
 import {fetchLesson} from "../api/lessons.ts";
 import {useLessonStore} from "../context/LessonContext"
 import Quiz from "../components/Quiz.tsx";
+import TypingBoxWithBlanks from "../components/TypingBoxWithBlanks.tsx";
 
 interface StepData {
     title: string;
@@ -97,6 +98,20 @@ const LessonDetail: React.FC = () => {
                     <TypingBox
                         selectedLanguage={selectedLanguage}
                         providedSnippet={step.codeSnippet}
+                    />
+                </div>
+            );
+        }
+
+        if (step.type === "typingChallengeWithBlanks" && step.codeSnippet && step.blankLines) {
+            return (
+                <div>
+                    <h3 className="text-xl font-bold">{step.title}</h3>
+                    <p className="mt-2">{step.description}</p>
+                    <TypingBoxWithBlanks
+                        codeLines={step.codeSnippet.split("\n")}
+                        blankLines={step.blankLines}
+                        language={selectedLanguage}
                     />
                 </div>
             );
