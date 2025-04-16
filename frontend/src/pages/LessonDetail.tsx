@@ -12,6 +12,7 @@ interface StepData {
     type?: string;
     questions?: QuizQuestion[];
     codeSnippet?: string;
+    blankLines?: number[];
 }
 
 interface QuizQuestion {
@@ -111,7 +112,6 @@ const LessonDetail: React.FC = () => {
                     <TypingBoxWithBlanks
                         codeLines={step.codeSnippet.split("\n")}
                         blankLines={step.blankLines}
-                        language={selectedLanguage}
                     />
                 </div>
             );
