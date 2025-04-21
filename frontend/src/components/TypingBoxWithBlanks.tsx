@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 
 interface TypingBoxWithBlanksProps {
-  codeLines: string[];     // Array of strings; each represents one line of code.
-  blankLines: number[];    // Array of zero-based line indices that should be "blank" (hidden) by default.
+  codeLines: string[];
+  blankLines: number[];
 }
 
 const TypingBoxWithBlanks: React.FC<TypingBoxWithBlanksProps> = ({ codeLines, blankLines }) => {
