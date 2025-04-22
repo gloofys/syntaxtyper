@@ -8,8 +8,8 @@ const lesson2: Lesson = {
         {
             title: "Introduction",
             description: `
-The \`useState\` hook lets you add “state” to function components.
-You can declare a piece of state with an initial value, then update it—and React will re‑render your component with the new value.
+The \`useState\` hook lets you add “state” to function components.  
+You declare a piece of state with an initial value, then call its setter to update it—and React will re‑render your component with the new value.
       `.trim(),
         },
         {
@@ -20,10 +20,8 @@ You can declare a piece of state with an initial value, then update it—and Rea
 import React, { useState } from "react";
 
 function Counter() {
-  // 1. Declare a state variable 'count' initialized to 0
   const [count, setCount] = useState(0);
 
-  // 2. Increment count when the button is clicked
   return (
     <div>
       <p>You clicked {count} times</p>
@@ -38,21 +36,70 @@ export default Counter;
       `.trim(),
         },
         {
-            title: "Explanation",
+            title: "Live Preview & Explanation",
+            type: "explanation",
             description: `
-1. **Destructuring:** \`const [count, setCount]\` pulls out the current state and a function to update it.  
-2. **Initial Value:** \`useState(0)\` sets the initial count to 0.  
-3. **Updating State:** Calling \`setCount(newValue)\` schedules a re‑render with the updated value.  
-4. **Why Not Direct Mutation?** You must use \`setCount\` so React knows your component’s state changed.
-      `.trim(),
-        },
+**What you just built**
+
+1. **Rendered HTML**
+   \`\`\`html
+   <div>
+     <p>You clicked 0 times</p>
+     <button>Click me</button>
+   </div>
+   \`\`\`
+
+2. **Interactive Behavior**
+   - On first render you see a paragraph showing “You clicked 0 times” and a button labeled “Click me.”
+   - Each time you click the button, the paragraph updates to reflect the new count.
+
+**Why it works**
+
+- **Destructuring:**  
+  \`const [count, setCount] = useState(0)\` pulls out:
+  1. \`count\` — the current state value, and  
+  2. \`setCount\` — the function to update it.
+
+- **Initial Value:**  
+  Passing \`0\` into \`useState(0)\` means \`count\` starts at 0.
+
+- **Updating State:**  
+  When you call \`setCount(count + 1)\`, React:
+  1. Schedules a re-render with the new value.  
+  2. Runs your \`Counter\` function again.  
+  3. Patches only the changed parts of the DOM (here, the number in the paragraph).
+
+- **No Direct Mutation:**  
+  Always use \`setCount\` instead of doing something like \`count++\`. Direct mutation won’t notify React, so the UI wouldn’t update.
+  `.trim(),
+            codeSnippet: `
+import React, { useState } from "react";
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
+    </div>
+  );
+}
+
+export default Counter;
+  `.trim(),
+            exampleKey: "Counter",
+        }
+        ,
         {
             title: "Quiz",
-            description: "Test your understanding of useState",
+            description: "Test your understanding of `useState`:",
             type: "quiz",
             questions: [
                 {
-                    question: "What does calling the updater function (e.g. setCount) do?",
+                    question: "What does calling the updater function (e.g. `setCount`) do?",
                     options: [
                         "Directly mutates the state variable",
                         "Schedules a re-render with the new state value",
@@ -62,11 +109,7 @@ export default Counter;
                 },
                 {
                     question: "How do you initialize state to an object instead of a number?",
-                    options: [
-                        "useState({})",
-                        "useStateObject({})",
-                        "useObjectState({})",
-                    ],
+                    options: ["`useState({})`", "`useStateObject({})`", "`useObjectState({})`"],
                     correctIndex: 0,
                 },
                 {
@@ -84,12 +127,12 @@ export default Counter;
             title: "Summary",
             description: `
 Great job! You’ve:
-- Learned how to declare state with \`useState\`.  
-- Written a counter component that updates on button click.  
-- Understood why you must use the updater function instead of direct assignment.
+- Written your first stateful React component.  
+- Seen its rendered HTML and how clicks update the UI.  
+- Learned why you always use the setter function.
 
-Next up, we’ll explore how to run side‑effects with \`useEffect\`.
-    `.trim(),
+Next up: we’ll explore side‑effects with the \`useEffect\` hook!
+      `.trim(),
         },
     ],
 };

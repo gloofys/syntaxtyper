@@ -5,6 +5,8 @@ import {fetchLesson} from "../api/lessons.ts";
 import {useLessonStore} from "../context/LessonContext"
 import Quiz from "../components/Quiz.tsx";
 import TypingBoxWithBlanks from "../components/TypingBoxWithBlanks.tsx";
+import { ExplanationPanel} from "../components/ExplanationPanel.tsx";
+
 
 interface StepData {
     title: string;
@@ -13,6 +15,7 @@ interface StepData {
     questions?: QuizQuestion[];
     codeSnippet?: string;
     blankLines?: number[];
+    exampleKey?: string;
 }
 
 interface QuizQuestion {
@@ -90,7 +93,6 @@ const LessonDetail: React.FC = () => {
             return <div>No content available for this step.</div>;
         }
 
-        // Check if the step requires a special component like the TypingBox
         if (step.type === "typingChallenge") {
             return (
                 <div>
@@ -124,6 +126,16 @@ const LessonDetail: React.FC = () => {
                     <p className="mt-2">{step.description}</p>
                     <Quiz questions={step.questions} onComplete={handleNext} />
                 </div>
+            );
+        }
+
+        if (step.type === "explanation") {
+            return (
+                <ExplanationPanel
+                    markdown={step.description!}
+                    code={step.codeSnippet!}
+                    exampleKey={step.exampleKey}
+                />
             );
         }
 

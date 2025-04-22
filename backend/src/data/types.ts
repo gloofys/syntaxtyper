@@ -11,6 +11,7 @@ export interface Step {
     questions?: QuizQuestion[];
     codeSnippet?: string;
     blankLines?: number[];
+    exampleKey?: string;
 }
 
 export interface Lesson {
