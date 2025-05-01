@@ -10,6 +10,7 @@ export interface Step {
     type?: string;
     questions?: QuizQuestion[];
     codeSnippet?: string;
+    codeLines?: string[];
     blankLines?: number[];
     exampleKey?: string;
 }

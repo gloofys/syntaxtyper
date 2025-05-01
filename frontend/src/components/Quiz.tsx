@@ -12,7 +12,7 @@ interface QuizProps {
 }
 
 const Quiz: React.FC<QuizProps> = ({questions, onComplete}) => {
-    const [answers, setAnswers] = useState<(number | null)[]> (Array(questions.length).fill(null))
+    const [answers, setAnswers] = useState<(number | null)[]>(Array(questions.length).fill(null))
     const [submitted, setSubmitted] = useState(false)
 
     const handleSelect = (questionIndex: number, optionIndex: number) => {
@@ -37,7 +37,7 @@ const Quiz: React.FC<QuizProps> = ({questions, onComplete}) => {
                     <p className="font-semibold">{q.question}</p>
                     <div className="mt-2 space-y-1">
                         {q.options.map((opt, oIndex) => {
-                        const isSelected = answers[qIndex] === oIndex
+                            const isSelected = answers[qIndex] === oIndex
                             const isCorrect = oIndex === q.correctIndex
                             const isWrong = submitted && isSelected && !isCorrect
 
@@ -45,12 +45,13 @@ const Quiz: React.FC<QuizProps> = ({questions, onComplete}) => {
                                 <button
                                     key={oIndex}
                                     onClick={() => handleSelect(qIndex, oIndex)}
-                                    className = {`block w-full text-left px-4 py-2 rounded border
-                                    ${isSelected ?  "border-blue-500 bg-blue-100" : "border-gray-300"}
+                                    className={`block w-full text-left px-4 py-2 rounded border
+                                    ${isSelected ? "border-blue-500 bg-blue-100" : "border-gray-600 hover:bg-gray-100"}
                                     ${submitted && isCorrect ? "border-green-500 bg-green-100" : ""}
                                     ${isWrong ? "border-red-500 bg-red-100" : ""}
+                                    transition-colors duration-200
                                     `}
-                                    >
+                                >
                                     {opt}
                                 </button>
                             );
@@ -65,7 +66,7 @@ const Quiz: React.FC<QuizProps> = ({questions, onComplete}) => {
                     onClick={handleSubmit}
                     className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md"
                     disabled={answers.includes(null)}
-                    >
+                >
                     Submit quiz
                 </button>
             ) : (
@@ -75,8 +76,8 @@ const Quiz: React.FC<QuizProps> = ({questions, onComplete}) => {
                     </p>
                     {onComplete && (
                         <button
-                        onClick={onComplete}
-                        className="mt-2 px-4 py-2 bg-green-500 text-white rounded"
+                            onClick={onComplete}
+                            className="mt-2 px-4 py-2 bg-green-500 text-white rounded"
                         >
                             Continue
                         </button>

@@ -16,6 +16,7 @@ interface StepData {
     codeSnippet?: string;
     blankLines?: number[];
     exampleKey?: string;
+    codeLines?: string[];
 }
 
 interface QuizQuestion {
@@ -106,13 +107,13 @@ const LessonDetail: React.FC = () => {
             );
         }
 
-        if (step.type === "typingChallengeWithBlanks" && step.codeSnippet && step.blankLines) {
+        if (step.type === "typingChallengeWithBlanks" && step.codeLines && step.blankLines) {
             return (
                 <div>
                     <h3 className="text-xl font-bold">{step.title}</h3>
                     <p className="mt-2">{step.description}</p>
                     <TypingBoxWithBlanks
-                        codeLines={step.codeSnippet.split("\n")}
+                        codeLines={step.codeLines}
                         blankLines={step.blankLines}
                     />
                 </div>
@@ -169,7 +170,7 @@ const LessonDetail: React.FC = () => {
                     Step {currentStep} of {lessonData.steps.length}
                 </p>
 
-                <div className="mt-4 p-4 border rounded-md">{renderStepContent()}</div>
+                <div className="mt-4 p-4 border rounded-md bg-white">{renderStepContent()}</div>
 
                 <div className="mt-4 flex space-x-4">
                     <button

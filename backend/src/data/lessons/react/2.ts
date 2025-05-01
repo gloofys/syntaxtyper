@@ -124,6 +124,30 @@ export default Counter;
             ],
         },
         {
+            title: "Fill in the blanks",
+            type: "typingChallengeWithBlanks",
+            description: "Same Counter, but fill in the blanked lines yourself!",
+            codeLines: [
+                `import React, { useState } from "react";`,
+                ``,
+                `function Counter() {`,
+                `  const [count, setCount] = useState(0);`,
+                ``,
+                `  return (`,
+                `    <div>`,
+                `      <p>You clicked {count} times</p>`,
+                `      <button onClick={() => setCount(count + 1)}>`,
+                `        Click me`,
+                `      </button>`,
+                `    </div>`,
+                `  );`,
+                `}`,
+                ``,
+                `export default Counter;`,
+            ],
+            blankLines: [3, 6, 8],  // zero-based indexes of the lines you want hidden
+        },
+        {
             title: "Summary",
             description: `
 Great job! You’ve:

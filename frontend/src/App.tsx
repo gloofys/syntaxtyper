@@ -11,17 +11,17 @@ const App = () => {
     const [selectedLanguage, setSelectedLanguage] = useState("react");
     return (
         <Router>
-        <div className = "bg-white dark:bg-gray-400">
-            <Header selectedLanguage={selectedLanguage} onLanguageChange={setSelectedLanguage} />
-            <Routes>
-                <Route path="/" element={<Navigate to="/react" />} />
-                <Route path="/congratulations" element={<CongratulationsPage />} />
-                <Route path="/:language" element={<Home />} />
-                <Route path="/:language/lessons" element={<LessonsList />} />
-                <Route path="/:language/lesson/:lessonId" element={<LessonDetail />} />
-                <Route path="/:language/challenges" element={<Challenges />} />
-            </Routes>
-        </div>
+            <div className="min-h-screen bg-white dark:bg-gray-300 flex flex-col">
+                <Header selectedLanguage={selectedLanguage} onLanguageChange={setSelectedLanguage}/>
+                <Routes>
+                    <Route path="/" element={<Navigate to="/react"/>}/>
+                    <Route path="/congratulations" element={<CongratulationsPage/>}/>
+                    <Route path="/:language" element={<Home/>}/>
+                    <Route path="/:language/lessons" element={<LessonsList/>}/>
+                    <Route path="/:language/lesson/:lessonId" element={<LessonDetail/>}/>
+                    <Route path="/:language/challenges" element={<Challenges/>}/>
+                </Routes>
+            </div>
         </Router>
     )
 }
