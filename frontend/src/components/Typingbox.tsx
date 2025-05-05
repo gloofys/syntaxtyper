@@ -110,14 +110,19 @@ const TypingBox: React.FC<TypingProps> = ({selectedLanguage, providedSnippet}) =
 
         if (e.key === "Backspace" && currentIndex > 0) {
             e.preventDefault();
-            const prevChar = snippet[currentIndex - 1];
-            if (prevChar === "\n") {
-                setCurrentIndex((prev) => prev - 1);
-            } else {
+
+            const newIndex = currentIndex - 1;
+
+            setCurrentIndex(newIndex);
+
+            setErrors((prev) => prev.filter((idx) => idx !== newIndex));
+
+            // if it wasn't a newline, also remove from `input`
+            if (snippet[newIndex] !== "\n") {
                 setInput((prev) => prev.slice(0, -1));
-                setCurrentIndex((prev) => Math.max(prev - 1, 0));
-                setErrors((prev) => prev.filter((idx) => idx !== currentIndex - 1));
             }
+
+            setIsCompleted(false);
         }
     };
 
@@ -131,11 +136,11 @@ const TypingBox: React.FC<TypingProps> = ({selectedLanguage, providedSnippet}) =
             {!isCompleted ? (
                 <>
           <pre
-              className="bg-gray-800 p-4 rounded-md text-lg font-mono mb-4  w-full max-w-2xl leading-relaxed whitespace-pre-wrap"
+              className="bg-gray-100 p-4 rounded-md text-lg font-mono mb-4  w-full max-w-2xl leading-relaxed whitespace-pre-wrap"
               onClick={() => inputRef.current?.focus()}
           >
             {snippet.split("").map((char, index) => {
-                let textColor = "text-white";
+                let textColor = "text-black";
                 if (index < currentIndex) {
                     textColor = errors.includes(index)
                         ? "text-red-500 bg-red-200"
