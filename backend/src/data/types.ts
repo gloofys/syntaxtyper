@@ -7,6 +7,8 @@ export interface QuizQuestion {
 export interface Step {
     title: string;
     description: string;
+    bullets?: string[];
+    outro?: string;
     type?: string;
     questions?: QuizQuestion[];
     codeSnippet?: string;

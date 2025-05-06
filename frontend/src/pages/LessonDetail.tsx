@@ -12,6 +12,8 @@ import Progress from "../components/Progress.tsx";
 interface StepData {
     title: string;
     description: string;
+    bullets?: string[];
+    outro?: string;
     type?: string;
     questions?: QuizQuestion[];
     codeSnippet?: string;
@@ -141,10 +143,27 @@ const LessonDetail: React.FC = () => {
             );
         }
 
+        if (step.bullets) {
+            return (
+                <div>
+                    <h3 className="text-xl font-bold">{step.title}</h3>
+                    {step.description && (
+                        <p className="mt-2">{step.description}</p>
+                    )}
+                    <ul className="list-disc list-inside mt-4 mb-4 space-y-1">
+                        {step.bullets.map((item, i) => (
+                            <li key={i}>{item}</li>
+                        ))}
+                    </ul>
+                    {step.outro && <p className="mt-2">{step.outro}</p>}
+                </div>
+            );
+        }
+
         return (
             <div>
-                <h3 className="text-2xl font-bold">{step.title}</h3>
-                <p className="mt-2 text-xl">{step.description}</p>
+                <h3 className="text-2xl px-6 font-bold">{step.title}</h3>
+                <p className="mt-2 px-6 text-xl">{step.description}</p>
             </div>
         );
     };

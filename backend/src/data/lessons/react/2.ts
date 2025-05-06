@@ -149,14 +149,13 @@ export default Counter;
         },
         {
             title: "Summary",
-            description: `
-Great job! You’ve:
-- Written your first stateful React component.  
-- Seen its rendered HTML and how clicks update the UI.  
-- Learned why you always use the setter function.
-
-Next up: we’ll explore side‑effects with the \`useEffect\` hook!
-      `.trim(),
+            description: "Great job! You’ve:",
+            bullets: [
+                "Written your first stateful React component.",
+                "Seen its rendered HTML and how clicks update the UI.",
+                "Learned why you always use the setter function.",
+            ],
+            outro: "Next up: we’ll explore side-effects with the useEffect hook!",
         },
     ],
 };
