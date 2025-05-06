@@ -39,7 +39,7 @@ export default Counter;
             title: "Live Preview & Explanation",
             type: "explanation",
             description: `
-***What you just built***
+****What you just built****
 
 1. **Rendered HTML**
    \`\`\`html
@@ -53,7 +53,7 @@ export default Counter;
    - On first render you see a paragraph showing “You clicked 0 times” and a button labeled “Click me.”
    - Each time you click the button, the paragraph updates to reflect the new count.
 
-***Why it works***
+****Why it works****
 
 - **Destructuring:**  
   \`const [count, setCount] = useState(0)\` pulls out:
@@ -131,16 +131,16 @@ export default Counter;
                 `import React, { useState } from "react";`,
                 ``,
                 `function Counter() {`,
-                `  const [count, setCount] = useState(0);`,
+                `    const [count, setCount] = useState(0);`,
                 ``,
-                `  return (`,
+                `    return (`,
                 `    <div>`,
-                `      <p>You clicked {count} times</p>`,
-                `      <button onClick={() => setCount(count + 1)}>`,
+                `        <p>You clicked {count} times</p>`,
+                `        <button onClick={() => setCount(count + 1)}>`,
                 `        Click me`,
-                `      </button>`,
+                `        </button>`,
                 `    </div>`,
-                `  );`,
+                `    );`,
                 `}`,
                 ``,
                 `export default Counter;`,
