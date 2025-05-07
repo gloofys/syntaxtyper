@@ -201,7 +201,13 @@ const LessonDetail: React.FC = () => {
                 </header>
 
                 <main
-                    className={["flex-1", "overflow-y-auto", "p-4", step?.type !== "explanation" && "grid place-content-center",]
+                    className={[
+                        "flex-1",
+                        "overflow-y-auto",
+                        "p-4",
+                        !["explanation", "typingChallenge", "typingChallengeWithBlanks"].includes(step?.type ?? "")
+                        && "grid place-content-center",
+                    ]
                         .filter(Boolean)
                         .join(" ")}
                 >

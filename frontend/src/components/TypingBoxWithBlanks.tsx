@@ -99,7 +99,7 @@ const TypingBoxWithBlanks: React.FC<TypingBoxWithBlanksProps> = ({codeLines, bla
             {!isCompleted ? (
                 <>
           <pre
-              className="bg-gray-100 p-4 rounded-md text-lg font-mono mb-4 w-full max-w-2xl leading-relaxed whitespace-pre-wrap"
+              className="bg-gray-100 p-4 rounded-md text-lg font-mono mb-4 w-full max-w-4xl leading-relaxed whitespace-pre-wrap"
               onClick={() => inputRef.current?.focus()}
           >
             {fullSnippet.split("").map((char, index) => {
