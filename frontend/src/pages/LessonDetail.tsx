@@ -184,7 +184,7 @@ const LessonDetail: React.FC = () => {
 
     return (
         <div className="w-full max-w-5xl mx-auto p-6">
-            <div className="flex flex-col h-[900px] border rounded-md bg-white overflow-hidden">
+            <div className="flex flex-col h-[90vh] border rounded-md bg-white overflow-hidden">
                 <header className="p-4 border-b">
                     <h2 className="text-2xl font-bold">
                         {selectedLanguage.toUpperCase()} Lesson {lessonNumber}
