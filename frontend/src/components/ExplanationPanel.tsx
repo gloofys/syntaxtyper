@@ -15,7 +15,7 @@ export const ExplanationPanel: React.FC<Props> = ({ markdown, code, exampleKey }
 
     return (
         <div className="flex flex-col gap-6 p-4 bg-white rounded shadow">
-            <div className="prose max-w-none">
+            <div className="prose max-w-none [&_hr]:mb-10">
                 <ReactMarkdown
                     components={{
                         code({node, inline, className, children, ...props}) {

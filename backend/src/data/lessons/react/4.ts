@@ -61,7 +61,7 @@ export const ThemeStatus: React.FC = () => {
 
 ---
 
-### 1. Define the Context
+**1. Define the Context**
 \`\`\`tsx
 import React, { createContext, useState, useContext } from "react";
 
@@ -76,14 +76,14 @@ export const ThemeContext = createContext<ThemeContextType>({
 });
 \`\`\`
 
-**Explanation:**
+
 - You define a TypeScript interface for your context's value.
 - \`createContext\` sets up the context with a default value (used if there's no matching provider).
 - This allows any descendant component to access \`theme\` and \`toggleTheme\`.
 
 ---
 
-### 2. Provide the Context
+**2. Provide the Context**
 \`\`\`tsx
 export const ThemeProvider: React.FC = ({ children }) => {
   const [theme, setTheme] = useState<"light" | "dark">("light");
@@ -99,14 +99,13 @@ export const ThemeProvider: React.FC = ({ children }) => {
 };
 \`\`\`
 
-**Explanation:**
 - The \`ThemeProvider\` manages the current theme using \`useState\`.
 - It wraps your app (or part of it) and passes down the context value.
 - Now any component inside it can read or update the theme.
 
 ---
 
-### 3. Consume the Context
+**3. Consume the Context**
 \`\`\`tsx
 export const ThemeStatus: React.FC = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -120,7 +119,6 @@ export const ThemeStatus: React.FC = () => {
 };
 \`\`\`
 
-**Explanation:**
 - You access context with \`useContext(ThemeContext)\`.
 - Whenever the context value changes (e.g., via \`toggleTheme\`), the component re-renders with the updated state.
 
