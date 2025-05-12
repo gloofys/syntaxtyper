@@ -1,10 +1,10 @@
 import react1 from "./react/1";
-import react2 from "./react/2";
-import react3 from "./react/3";
+import react2 from "./react/2useState";
+import react3 from "./react/3useEffect";
 import java1 from "./java/1";
 import java2 from "./java/2";
-import react4 from "./react/4";
-import react5 from "./react/5";
+import react4 from "./react/4useContext";
+import react5 from "./react/5useReducer";
 
 // Add new lessons here as you create them
 
