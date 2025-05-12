@@ -127,7 +127,7 @@ const LessonDetail: React.FC = () => {
             return (
                 <div>
                     <h3 className="text-xl font-bold">{step.title}</h3>
-                    <p className="mt-2">{step.description}</p>
+                    <p className="mt-2 mb-4">{step.description}</p>
                     <Quiz questions={step.questions} onComplete={handleNext} />
                 </div>
             );
