@@ -23,31 +23,31 @@ import React, { useReducer } from "react";
 type Action = { type: "increment" } | { type: "decrement" } | { type: "reset" };
 
 const reducer = (state: number, action: Action): number => {
-  switch (action.type) {
-    case "increment":
-      return state + 1;
-    case "decrement":
-      return state - 1;
-    case "reset":
-      return 0;
-    default:
-      return state;
-  }
+    switch (action.type) {
+        case "increment":
+            return state + 1;
+        case "decrement":
+            return state - 1;
+        case "reset":
+            return 0;
+        default:
+            return state;
+    }
 };
 
 const Counter: React.FC = () => {
-  const [count, dispatch] = useReducer(reducer, 0);
+    const [count, dispatch] = useReducer(reducer, 0);
 
-  return (
-    <div>
-      <p>Count: {count}</p>
-      <button onClick={() => dispatch({ type: "increment" })}>+</button>
-      <button onClick={() => dispatch({ type: "decrement" })}>-</button>
-      <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
-    </div>
-  );
+    return (
+        <div>
+            <p>Count: {count}</p>
+            <button onClick={() => dispatch({ type: "increment" })}>+</button>
+            <button onClick={() => dispatch({ type: "decrement" })}>-</button>
+            <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+        </div>
+    );
 };
-      `.trim(),
+    `.trim(),
             exampleKey: "CounterExample",
         },
         {
@@ -140,25 +140,25 @@ const [count, dispatch] = useReducer(reducer, 0);
                 `type Action = { type: "increment" } | { type: "decrement" } | { type: "reset" };`,
                 ``,
                 `const reducer = (state: number, action: Action): number => {`,
-                `  switch (action.type) {`,
-                `    case "increment": return state + 1;`,
-                `    case "decrement": return state - 1;`,
-                `    case "reset": return 0;`,
-                `    default: return state;`,
-                `  }`,
+                `    switch (action.type) {`,
+                `        case "increment": return state + 1;`,
+                `        case "decrement": return state - 1;`,
+                `        case "reset": return 0;`,
+                `        default: return state;`,
+                `    }`,
                 `};`,
                 ``,
                 `const Counter: React.FC = () => {`,
-                `  const [count, dispatch] = useReducer(reducer, 0);`,
+                `    const [count, dispatch] = useReducer(reducer, 0);`,
                 ``,
-                `  return (`,
-                `    <div>`,
-                `      <p>Count: {count}</p>`,
-                `      <button onClick={() => dispatch({ type: "increment" })}>+</button>`,
-                `      <button onClick={() => dispatch({ type: "decrement" })}>-</button>`,
-                `      <button onClick={() => dispatch({ type: "reset" })}>Reset</button>`,
-                `    </div>`,
-                `  );`,
+                `    return (`,
+                `        <div>`,
+                `            <p>Count: {count}</p>`,
+                `            <button onClick={() => dispatch({ type: "increment" })}>+</button>`,
+                `            <button onClick={() => dispatch({ type: "decrement" })}>-</button>`,
+                `            <button onClick={() => dispatch({ type: "reset" })}>Reset</button>`,
+                `        </div>`,
+                `    );`,
                 `};`,
             ],
             blankLines: [1, 5, 14],
