@@ -58,6 +58,21 @@ export default Welcome;`,
             ],
         },
         {
+            title: "Fill in the blanks",
+            type: "typingChallengeWithBlanks",
+            description: "Fill in the missing pieces to complete your first React component.",
+            codeLines: [
+                `import React from "react";`,
+                ``,
+                `function Welcome() {`,
+                `    return <h1>Hello, React!</h1>;`,
+                `}`,
+                ``,
+                `export default Welcome;`,
+            ],
+            blankLines: [0, 2, 6],
+        },
+        {
             title: "Summary",
             description:
                 "Nice work! You’ve learned what JSX is, how to define a simple React component, and practiced writing one yourself. Next, we’ll dive into using props and component composition.",
