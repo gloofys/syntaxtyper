@@ -105,6 +105,7 @@ const LessonDetail: React.FC = () => {
                     <TypingBox
                         selectedLanguage={selectedLanguage}
                         providedSnippet={step.codeSnippet}
+                        disableResults={true}
                     />
                 </div>
             );
@@ -118,6 +119,7 @@ const LessonDetail: React.FC = () => {
                     <TypingBoxWithBlanks
                         codeLines={step.codeLines}
                         blankLines={step.blankLines}
+                        disableResults={true}
                     />
                 </div>
             );

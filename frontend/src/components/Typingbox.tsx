@@ -5,8 +5,9 @@ import Results from "./Results.tsx";
 interface TypingProps {
     selectedLanguage: string;
     providedSnippet?: string;
+    disableResults?: boolean;
 }
-const TypingBox: React.FC<TypingProps> = ({selectedLanguage, providedSnippet}) => {
+const TypingBox: React.FC<TypingProps> = ({selectedLanguage, providedSnippet, disableResults = false}) => {
     const [snippet, setSnippet] = useState("");
     const [input, setInput] = useState("");
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -130,6 +131,25 @@ const TypingBox: React.FC<TypingProps> = ({selectedLanguage, providedSnippet}) =
         inputRef.current?.focus();
     }, []);
 
+    const resetStateWithSnippet = (newSnippet: string) => {
+        setSnippet(newSnippet);
+        setInput("");
+        setCurrentIndex(0);
+        setErrors([]);
+        setIsCompleted(false);
+        setIsRunning(false);
+        setTime(0);
+    };
+
+    const handleRetrySame = () => {
+        resetStateWithSnippet(snippet);
+    };
+
+    const handleNewChallenge = async () => {
+        const data = await fetchSnippet(selectedLanguage);
+        if (data) resetStateWithSnippet(data.text);
+    };
+
     return (
         <div className="flex flex-col items-center justify-center p-5">
 
@@ -185,9 +205,13 @@ const TypingBox: React.FC<TypingProps> = ({selectedLanguage, providedSnippet}) =
                     charCount={currentIndex}
                     errors={errors.length}
                     snippet={snippet}
-                    onReset={loadNewSnippet}
                     isCompleted={isCompleted}
+                    {...(!disableResults && {
+                        onRetrySame: handleRetrySame,
+                        onNewChallenge: handleNewChallenge
+                    })}
                 />
+
             )}
         </div>
     );

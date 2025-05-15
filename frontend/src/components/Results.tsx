@@ -7,11 +7,12 @@ interface ResultsProps {
     charCount: number;
     errors:number;
     snippet:string;
-    onReset: () => void;
+    onRetrySame?: () => void;
+    onNewChallenge?: () => void;
     isCompleted: boolean;
 }
 
-const Results:React.FC<ResultsProps> = ({time, charCount, errors, snippet, onReset}) => {
+const Results:React.FC<ResultsProps> = ({time, charCount, errors, snippet, onRetrySame, onNewChallenge}) => {
 //     EXECUTION RESULTS TO BE ADDED HERE
     const executeSnippet = (code: string) => {
         if(code.includes("return")) return "Output: 42";
@@ -33,12 +34,26 @@ const Results:React.FC<ResultsProps> = ({time, charCount, errors, snippet, onRes
                 <h3 className="text-lg font-semibold">Code Execution result:</h3>
                 <pre className = "text-sm text-gray-700">{executeSnippet(snippet)}</pre>
             </div>
-            <button
-                className="mt-6 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"
-                onClick={onReset}
-            >
-                Try Again
-            </button>
+            {(onRetrySame || onNewChallenge) && (
+                <div className="flex justify-center space-x-4 mt-6">
+                    {onRetrySame && (
+                        <button
+                            className="px-4 py-2 bg-blue-500 text-white rounded-md"
+                            onClick={onRetrySame}
+                        >
+                            Try Again (Same)
+                        </button>
+                    )}
+                    {onNewChallenge && (
+                        <button
+                            className="px-4 py-2 bg-green-500 text-white rounded-md"
+                            onClick={onNewChallenge}
+                        >
+                            New Challenge
+                        </button>
+                    )}
+                </div>
+            )}
         </div>
     );
 };
