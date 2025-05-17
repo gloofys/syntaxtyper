@@ -25,13 +25,13 @@ const CounterExample: React.FC = () => {
             <div className="flex gap-2">
                 <button
                     onClick={() => dispatch({ type: "increment" })}
-                    className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600"
+                    className="px-3 py-1 bg-green-300 text-white rounded hover:bg-green-600"
                 >
                     +
                 </button>
                 <button
                     onClick={() => dispatch({ type: "decrement" })}
-                    className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+                    className="px-3 py-1 bg-red-400 text-white rounded hover:bg-red-600"
                 >
                     -
                 </button>
